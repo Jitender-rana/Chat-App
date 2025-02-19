@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/middlewares/auth.ts","./src/middlewares/userdatavalidator.ts","./src/routes/user.ts"],"version":"5.7.3"}
