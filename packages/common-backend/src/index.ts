@@ -1,3 +1,6 @@
 import dotenv from 'dotenv';
+import "dotenv/config";
+import { json } from 'stream/consumers';
 dotenv.config();
-export const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET=process.env.JWT_SECRET|| "hkbcipewboielb";
+export {JWT_SECRET};

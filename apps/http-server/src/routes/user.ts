@@ -1,4 +1,4 @@
-import { prismaClient } from "@repo/db-package/client";
+import {prismaClient} from "@repo/db-package/client";
 import express, {Request,Response, Router} from "express";
 import { userdataMiddleware } from "../middlewares/userdatavalidator";
 import { JWT_SECRET } from "@repo/common-backend/config";
@@ -79,7 +79,8 @@ userRouter.post("/signin",userdataMiddleware,async (req: Request,res: Response)=
             return;
         }
         if(user){
-            const token=jwt.sign(user.email,JWT_secret!);
+            console.log(JWT_SECRET);
+            const token=jwt.sign({email: user.email},JWT_secret!);
             res.json({
                 message: "User signed in successfully",
                 token: token,
@@ -87,7 +88,8 @@ userRouter.post("/signin",userdataMiddleware,async (req: Request,res: Response)=
         }
 
 
-    }catch{
+    }catch(error){
+        console.log(error);
         console.log("error while signing in");
         res.json({
             message: "Error while signin",
