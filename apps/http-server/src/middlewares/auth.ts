@@ -2,7 +2,7 @@ import { JWT_SECRET } from "@repo/common-backend/config";
 import { NextFunction,Request,Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 export interface authenticatedRequest extends Request{
-    userEmail?: String,
+    userId?: String,
 }
 function authMiddleware(req: authenticatedRequest,res:Response,next:NextFunction){
     try{
@@ -24,7 +24,7 @@ function authMiddleware(req: authenticatedRequest,res:Response,next:NextFunction
         }
         const decodeddata=jwt.verify(token,JWT_SECRET) as JwtPayload;
         if(decodeddata &&  typeof decodeddata==="object" && decodeddata.email){
-            req.userEmail=decodeddata.email;
+            req.userId=decodeddata.userId;
             next();
         }else{
             res.json({

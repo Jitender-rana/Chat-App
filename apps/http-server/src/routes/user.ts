@@ -80,7 +80,7 @@ userRouter.post("/signin",userdataMiddleware,async (req: Request,res: Response)=
         }
         if(user){
             console.log(JWT_SECRET);
-            const token=jwt.sign({email: user.email},JWT_secret!);
+            const token=jwt.sign({userId: user.id},JWT_secret!);
             res.json({
                 message: "User signed in successfully",
                 token: token,

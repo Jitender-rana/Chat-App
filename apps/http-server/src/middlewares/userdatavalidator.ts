@@ -7,6 +7,7 @@ function userdataMiddleware(req:Request,res:Response,next:NextFunction){
     }catch(error){
         if(error instanceof z.ZodError){
             
+            
             res.json({
                 message: "validation error",
                 error: error.errors[0]?.message,

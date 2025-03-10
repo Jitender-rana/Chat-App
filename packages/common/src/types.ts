@@ -8,4 +8,8 @@ const userSchema=z.object({
 
 
 })
-export {userSchema,z}
+const contentSchema=z.object({
+    name: z.string().min(1,{message: "name is required"}),
+
+})
+export {userSchema,z,contentSchema};
