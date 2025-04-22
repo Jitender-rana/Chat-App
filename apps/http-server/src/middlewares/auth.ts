@@ -1,8 +1,8 @@
-import { JWT_SECRET } from "@repo/common-backend/config";
+import  JWT_SECRET  from "@repo/common-backend/config";
 import { NextFunction,Request,Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 export interface authenticatedRequest extends Request{
-    userId?: String,
+    userId?: string;
 }
 function authMiddleware(req: authenticatedRequest,res:Response,next:NextFunction){
     try{
@@ -23,21 +23,22 @@ function authMiddleware(req: authenticatedRequest,res:Response,next:NextFunction
             return;
         }
         const decodeddata=jwt.verify(token,JWT_SECRET) as JwtPayload;
-        if(decodeddata &&  typeof decodeddata==="object" && decodeddata.email){
+        if(decodeddata &&  typeof decodeddata==="object" && decodeddata.userId){
             req.userId=decodeddata.userId;
             next();
         }else{
             res.json({
                 noauth: false,
-                message: "invalid token 2",
+                message: "invalid token 1 inner one",
             })
+            return;
         }
 
 
 
     }catch(error){
         console.error("Error during authentication:", error);
-        res.json({ message: "Invalid token 2" });
+        res.json({ message: "Invalid token 2 outer one " });
         return;
 
     }

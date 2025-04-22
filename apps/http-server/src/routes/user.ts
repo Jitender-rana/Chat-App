@@ -1,7 +1,7 @@
 import {prismaClient} from "@repo/db-package/client";
 import express, {Request,Response, Router} from "express";
 import { userdataMiddleware } from "../middlewares/userdatavalidator";
-import { JWT_SECRET } from "@repo/common-backend/config";
+import  JWT_SECRET  from "@repo/common-backend/config";
 import jwt from "jsonwebtoken";
 const userRouter: Router=express.Router();
 const JWT_secret=JWT_SECRET;

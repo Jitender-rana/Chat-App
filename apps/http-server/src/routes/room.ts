@@ -53,10 +53,10 @@ roomRouter.post("/create-room",authMiddleware,async (req: authenticatedRequest,r
 
 })
 
-roomRouter.get("/get-chats/:roomId",authMiddleware,async (req,res)=>{
+roomRouter.get("/get-chats/:roomId",async (req,res)=>{
     try{
-        const roomId=req.params.roomId;
-        console.log(req.params.roomId);
+        const roomId=String(req.params.roomId);
+        console.log(`The room id is: ${req.params.roomId}`);
         const messages=await prismaClient.chat.findMany({
             where:{
                 roomId:roomId
@@ -66,6 +66,7 @@ roomRouter.get("/get-chats/:roomId",authMiddleware,async (req,res)=>{
             },
             take:1000
         })
+        console.log(`The messages fetched from db are ${messages}`);
         res.json({
             messages
         })
@@ -87,14 +88,17 @@ roomRouter.get("/get-chats/:roomId",authMiddleware,async (req,res)=>{
 
 
 
-roomRouter.get("/get-room/:name",async(req:Request,res:Response)=>{
+roomRouter.get("/get-room/:slug",async(req:Request,res:Response)=>{
     try{
-        const name=req.params.name;
+        const name=req.params.slug;
+        console.log(`the slug for room is : ${name}`);
         const room=await prismaClient.room.findFirst({
             where:{
                 name: name,
             }
         })
+        console.log(room);
+        console.log(JSON.stringify(room));
         res.json({
             room: room,
             message: "room found",

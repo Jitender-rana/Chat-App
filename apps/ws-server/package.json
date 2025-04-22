@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b",
+    "build": "npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    
     "start": "node ./dist/index.js",
     "dev": "npm run build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +13,11 @@
   "dependencies": {
     "@repo/common": "workspace:*",
     "@repo/common-backend": "workspace:*",
+    "@repo/db-package": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.8",
+    "esbuild": "0.25.0",
+    "jsonwebtoken": "^9.0.2",
     "ws": "^8.18.0"
   },
   "keywords": [],

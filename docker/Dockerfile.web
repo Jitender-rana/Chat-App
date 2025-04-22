@@ -1,0 +1,23 @@
+FROM node:20-alpine
+
+WORKDIR /usr/src/app
+
+ARG DATABASE_URL
+COPY ./packages ./packages
+COPY ./pnpm-lock.yaml  ./pnpm-lock.yaml
+COPY ./pnpm-workspace.yaml  ./pnpm-workspace.yaml
+
+COPY ./package.json ./package.json
+COPY ./turbo.json ./turbo.json
+
+COPY ./apps/web ./apps/web
+
+RUN npm install -g pnpm
+RUN pnpm install
+RUN npm run db:generate
+
+RUN DATABASE_URL=$DATABASE_URL npx turbo build --filter=web...
+
+EXPOSE 3000
+
+CMD ["bun", "run", "start:web"]

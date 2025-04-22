@@ -1,11 +1,16 @@
 {
   "name": "draw-app",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "cd packages/db-package && npx prisma generate && cd ../..",
+    "start:web": "cd apps/web && npm run start",
+    "start:backend": "cd apps/backend && npm run start",
+    "start:ws": "cd apps/websocket && npm run start"
   },
   "devDependencies": {
     "prettier": "^3.5.0",
