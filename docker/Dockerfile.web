@@ -20,4 +20,4 @@ RUN DATABASE_URL=$DATABASE_URL npx turbo build --filter=web...
 
 EXPOSE 3000
 
-CMD ["bun", "run", "start:web"]
+CMD ["npm", "run", "start:web"]
